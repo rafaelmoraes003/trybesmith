@@ -6,6 +6,11 @@ import { IProducts, IProductsBody, ProductsServiceData, StatusCode } from '../ty
 class ProductsService {
   productsModel = new ProductsModel(connection);
 
+  public listAll = async (): Promise<ProductsServiceData> => {
+    const products: IProducts[] = await this.productsModel.listAll();
+    return { code: StatusCode.OK, data: products };
+  };
+
   public create = async (product: IProductsBody): Promise<ProductsServiceData> => {
     const { error } = productsSchema.validate(product);
     if (error) {
