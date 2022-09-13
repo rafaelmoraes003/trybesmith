@@ -5,6 +5,7 @@ export interface IProductsBody {
 
 export interface IProducts extends IProductsBody {
   id: number,
+  userId?: number | null,
 }
 
 export enum StatusCode {
