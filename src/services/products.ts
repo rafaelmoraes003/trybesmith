@@ -1,6 +1,6 @@
 import ProductsModel from '../models/products';
 import connection from '../models/connection';
-import { productsSchema } from '../schemas/products';
+import productsSchema from '../schemas/products';
 import { IProducts, IProductsBody, ProductsServiceData, StatusCode } from '../types/interfaces';
 
 class ProductsService {
