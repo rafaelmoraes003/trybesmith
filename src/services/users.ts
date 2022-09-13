@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import UserModel from '../models/users';
 import connection from '../models/connection';
-import { IUserBody, IUserCreated, StatusCode } from '../types/interfaces';
+import { IUserBody, IUserResponse, StatusCode } from '../types/interfaces';
 import userSchema from '../schemas/users';
 
 const JWT_SECRET = 'supersecretpassword';
@@ -9,7 +9,7 @@ const JWT_SECRET = 'supersecretpassword';
 class UserService {
   userModel = new UserModel(connection);
 
-  public create = async (user: IUserBody): Promise<IUserCreated> => {
+  public create = async (user: IUserBody): Promise<IUserResponse> => {
     const { error } = userSchema.validate(user);
     
     if (error) {
