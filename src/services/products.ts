@@ -14,7 +14,10 @@ class ProductsService {
   public create = async (product: IProductsBody): Promise<ProductsServiceData> => {
     const { error } = productsSchema.validate(product);
     if (error) {
-      return { code: StatusCode.BAD_REQUEST, error: error.details[0].message };
+      const status = error.details[0].message.includes('required')
+        ? StatusCode.BAD_REQUEST
+        : StatusCode.SEMANTIC_ERROR;
+      return { code: status, error: error.details[0].message };
     }
     const newProduct: IProducts = await this.productsModel.create(product);
     return { code: StatusCode.CREATED, data: newProduct };

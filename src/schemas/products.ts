@@ -1,8 +1,8 @@
 import joi from 'joi';
 
 const productsSchema = joi.object({
-  name: joi.string().required(),
-  amount: joi.string().required(),
+  name: joi.string().min(3).required(),
+  amount: joi.string().min(3).required(),
 });
 
 export default productsSchema;
