@@ -11,8 +11,12 @@ class UserService {
 
   public create = async (user: IUserBody): Promise<IUserCreated> => {
     const { error } = userSchema.validate(user);
+    
     if (error) {
-      return { code: StatusCode.BAD_REQUEST, error: error.details[0].message };
+      const status = error.details[0].message.includes('required') 
+        ? StatusCode.BAD_REQUEST
+        : StatusCode.SEMANTIC_ERROR;
+      return { code: status, error: error.details[0].message };
     }
     await this.userModel.create(user);
     const token: string = jwt.sign(user, JWT_SECRET);
