@@ -34,8 +34,19 @@ export interface IUserBody {
   password: string,
 }
 
-export interface IUserCreated {
+export interface IUserResponse {
   code: StatusCode,
   token?: string,
   error?: string,
+}
+
+export interface IUser extends IUserBody {
+  id: number,
+}
+
+/// ////////////// LOGIN /////////////////////////////////
+
+export interface ILogin {
+  username: string,
+  password: string,
 }
