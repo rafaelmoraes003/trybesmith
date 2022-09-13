@@ -1,5 +1,5 @@
-import { Pool, ResultSetHeader } from 'mysql2/promise';
-import { IUserBody } from '../types/interfaces';
+import { Pool, ResultSetHeader, RowDataPacket } from 'mysql2/promise';
+import { ILogin, IUser, IUserBody } from '../types/interfaces';
 
 class UserModel {
   private connection: Pool;
@@ -7,6 +7,17 @@ class UserModel {
   constructor(connection: Pool) {
     this.connection = connection;
   }
+
+  public findUser = async (myUser: ILogin): Promise<boolean> => {
+    const { username, password } = myUser;
+    const [[findUser]] = await this.connection
+      .execute<RowDataPacket[]>(
+      'SELECT * FROM Trybesmith.Users WHERE username = ? AND password = ?',
+      [username, password],
+    );
+    const user = findUser as IUser;
+    return !!user;
+  };
 
   public create = async (user: IUserBody): Promise<void> => {
     const { username, classe, level, password } = user;
