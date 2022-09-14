@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import ProductsService from '../services/products';
-import { IProductsBody } from '../types/interfaces';
+import { IProducts } from '../types/products';
 
 class ProductsController {
   productsService = new ProductsService();
@@ -10,7 +10,7 @@ class ProductsController {
     return res.status(code).json(data);
   };
 
-  public create = async (req: Request<unknown, unknown, IProductsBody>, res: Response) => {
+  public create = async (req: Request<unknown, unknown, IProducts>, res: Response) => {
     const { name, amount } = req.body;
     const { code, data, error } = await this.productsService.create({ name, amount });
     if (error) {
