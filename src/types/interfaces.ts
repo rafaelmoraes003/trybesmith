@@ -44,6 +44,19 @@ export interface IUser extends IUserBody {
   id: number,
 }
 
+/// ////////////// ORDERS /////////////////////////////////
+
+export interface IOrders {
+  id: number,
+  userId: number,
+  productsIds: number[],
+}
+
+export interface IOrderResponse {
+  code: StatusCode,
+  data: IOrders[],
+}
+
 /// ////////////// LOGIN /////////////////////////////////
 
 export interface ILogin {
