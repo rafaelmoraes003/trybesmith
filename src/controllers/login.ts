@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
 import LoginService from '../services/login';
-import { ILogin } from '../types/interfaces';
+import { ILoginUser } from '../types/users';
 
 class LoginController {
   loginService = new LoginService();
 
   public login = async (
-    req: Request<unknown, unknown, ILogin>, 
+    req: Request<unknown, unknown, ILoginUser>, 
     res: Response,
   ) => {
     const { username, password } = req.body;
