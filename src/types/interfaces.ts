@@ -1,3 +1,6 @@
+import { Request } from 'express';
+import { JwtPayload } from 'jsonwebtoken';
+
 export enum StatusCode {
   OK = 200,
   CREATED = 201,
@@ -9,57 +12,14 @@ export enum StatusCode {
   SERVER_ERROR = 500,
 }
 
-/// //////////// PRODUCTS ///////////////////////////////////
-export interface IProductsBody {
-  name: string,
-  amount: string,
+/// ////////////// RESPONSE /////////////////////////////////
+
+export interface CustomRequest extends Request {
+  userId?: number;
 }
 
-export interface IProducts extends IProductsBody {
+/// ////////////// JWT /////////////////////////////////
+
+export interface IJWT extends JwtPayload {
   id: number,
-  userId?: number | null,
-}
-
-export interface ProductsServiceData {
-  code: StatusCode,
-  data?: IProducts | IProducts[],
-  error?: string,
-}
-
-/// ////////////// USERS /////////////////////////////////
-export interface IUserBody {
-  username: string,
-  classe: string,
-  level: number,
-  password: string,
-}
-
-export interface IUserResponse {
-  code: StatusCode,
-  token?: string,
-  error?: string,
-}
-
-export interface IUser extends IUserBody {
-  id: number,
-}
-
-/// ////////////// ORDERS /////////////////////////////////
-
-export interface IOrders {
-  id: number,
-  userId: number,
-  productsIds: number[],
-}
-
-export interface IOrderResponse {
-  code: StatusCode,
-  data: IOrders[],
-}
-
-/// ////////////// LOGIN /////////////////////////////////
-
-export interface ILogin {
-  username: string,
-  password: string,
 }
