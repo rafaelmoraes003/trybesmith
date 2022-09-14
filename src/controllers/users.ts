@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
 import UserService from '../services/users';
-import { IUserBody } from '../types/interfaces';
+import { IUser } from '../types/users';
 
 class UserController {
   userService = new UserService();
 
-  public create = async (req: Request<unknown, unknown, IUserBody>, res: Response) => {
+  public create = async (req: Request<unknown, unknown, IUser>, res: Response) => {
     const { username, classe, level, password } = req.body;
     const { code, token, error } = await this.userService.create({
       username,
