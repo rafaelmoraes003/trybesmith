@@ -1,19 +1,21 @@
-import { NextFunction, Request, Response } from 'express';
+import { NextFunction, Response } from 'express';
 import jwt from 'jsonwebtoken';
+import { CustomRequest, IJWT } from '../types/interfaces';
 
 const JWT_SECRET = 'supersecretpassword';
 
-const auth = (req: Request, res: Response, next: NextFunction) => {
+const auth = (req: CustomRequest, res: Response, next: NextFunction) => {
   const { authorization: token } = req.headers;
   try {
     if (!token) {
       return res.status(401).json({ message: 'Token not found' });
     }
 
-    jwt.verify(token, JWT_SECRET);
+    const { id } = jwt.verify(token, JWT_SECRET) as IJWT;
+    req.userId = id;
     next();
   } catch (error) {
-    return res.status(401).json({ message: 'Expired or invalid token' });
+    return res.status(401).json({ message: 'Invalid token' });
   }
 };
 
