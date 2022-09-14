@@ -51,4 +51,10 @@ Sobre o `/orders`, ele possui 2 endpoints:
 - `GET` ( / ) - Listar todos os pedidos;
 - `POST` ( / ) - Criação de um novo pedido;
 
-`OBS:` O endpoint `POST` `/orders` necessita que o usuário faça login na rota `POST` `/login` para receber um token que deve ser colocado no header da requisição.
+###
+
+<h2 align="left">Observações</h2>
+
+1. O endpoint `POST` `/orders` necessita que o usuário faça login na rota `POST` `/login` para receber um token que deve ser colocado no header da requisição.
+
+2. O banco de dados não está criado. Para conseguir utilizá-lo, é necessaŕio criar um arquivo `.env` e colocar as suas credenciais MySQL com base no arquivo `./src/models/connection.ts`. Para popular o banco de fato, pode-se utilizar a query do arquivo `Trybesmith.sql`.
